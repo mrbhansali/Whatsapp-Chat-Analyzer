@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 
 def getDateFormate(string):
-    for i in string:
+    for i in range(0,len(string),15):
         date = i.split(',')[0]
         d = int(re.findall(r'(\d{1,2})\/\d{1,2}',date)[0])
         if(d>12):
