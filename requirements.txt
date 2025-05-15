@@ -1,12 +1,8 @@
 streamlit
-re
 pandas
 numpy
-matplotlib.pyplot
 seaborn
-datetime
-urlextract
 wordcloud
-collections
+urlextract
 emoji
-warnings
+matplotlib
