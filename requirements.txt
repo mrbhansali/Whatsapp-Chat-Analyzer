@@ -1,0 +1,12 @@
+streamlit
+re
+pandas
+numpy
+matplotlib.pyplot
+seaborn
+datetime
+urlextract
+wordcloud
+collections
+emoji
+warnings
