@@ -2,11 +2,21 @@ import re
 import pandas as pd
 import datetime
 
-def getTimeDate(string):
+def getDateFormate(string):
+    for i in string:
+        date = i.split(',')[0]
+        d = int(re.findall(r'(\d{1,2})\/\d{1,2}',date)[0])
+        if(d>12):
+            return 1
+    return 0
+
+def getTimeDate(string,formt):
     string = string.split(',')
     date = string[0]
     time = string[1]
     time = time.split('-')[0].strip()
+    if(formt):
+        date = datetime.datetime.strptime(date,"%d/%m/%y").strftime("%m/%d/%y")
     if(len(time)>5):
         time = datetime.datetime.strptime(time,"%I:%M %p").strftime('%H:%M')
     return date+" "+time
@@ -16,8 +26,9 @@ def preprocess(file):
     messages = re.split(pattern,file)[1:]
     dates = re.findall(pattern, file)
     df = pd.DataFrame({'user_messages': messages,'message_dates':dates })
+    formt = getDateFormate(df['message_dates'])
     df['message_dates'] = df['message_dates'].apply(
-        lambda text: getTimeDate(text)
+        lambda text: getTimeDate(text,formt)
     )
     df.rename(columns={'message_dates':'dates'})
 
